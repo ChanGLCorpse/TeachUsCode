@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Color Adjuster</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #colorDisk {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .slider-container input[type="range"] {
+            width: 600px;
+        }
+        .values {
+            display: flex;
+            justify-content: space-between;
+            width: 600px;
+            margin-bottom: 5px;
+        }
+        .values div {
+            text-align: center;
+            width: 33%;
+        }
+    </style>
+</head>
+<body>
+    <div id="colorDisk" style="background-color: rgb(128, 128, 128);"></div>
+
+    <div class="slider-container">
+        <div class="values">
+            <div>二进制：<span id="redBinary">10000000</span></div>
+            <div>十六进制：<span id="redHex">80</span></div>
+            <div>十进制：<span id="redDecimal">128</span></div>
+        </div>
+        <input type="range" id="redSlider" min="0" max="255" value="128">
+    </div>
+    <div class="slider-container">
+        <div class="values">
+            <div>二进制：<span id="greenBinary">10000000</span></div>
+            <div>十六进制：<span id="greenHex">80</span></div>
+            <div>十进制：<span id="greenDecimal">128</span></div>
+        </div>
+        <input type="range" id="greenSlider" min="0" max="255" value="128">
+    </div>
+    <div class="slider-container">
+        <div class="values">
+            <div>二进制：<span id="blueBinary">10000000</span></div>
+            <div>十六进制：<span id="blueHex">80</span></div>
+            <div>十进制：<span id="blueDecimal">128</span></div>
+        </div>
+        <input type="range" id="blueSlider" min="0" max="255" value="128">
+    </div>
+
+    <script>
+        const redSlider = document.getElementById('redSlider');
+        const greenSlider = document.getElementById('greenSlider');
+        const blueSlider = document.getElementById('blueSlider');
+        const colorDisk = document.getElementById('colorDisk');
+        
+        const redBinary = document.getElementById('redBinary');
+        const redHex = document.getElementById('redHex');
+        const redDecimal = document.getElementById('redDecimal');
+        
+        const greenBinary = document.getElementById('greenBinary');
+        const greenHex = document.getElementById('greenHex');
+        const greenDecimal = document.getElementById('greenDecimal');
+        
+        const blueBinary = document.getElementById('blueBinary');
+        const blueHex = document.getElementById('blueHex');
+        const blueDecimal = document.getElementById('blueDecimal');
+        
+        function updateColor() {
+            const red = parseInt(redSlider.value);
+            const green = parseInt(greenSlider.value);
+            const blue = parseInt(blueSlider.value);
+            
+            const redHexValue = red.toString(16).padStart(2, '0');
+            const greenHexValue = green.toString(16).padStart(2, '0');
+            const blueHexValue = blue.toString(16).padStart(2, '0');
+            
+            const redBinaryValue = red.toString(2).padStart(8, '0');
+            const greenBinaryValue = green.toString(2).padStart(8, '0');
+            const blueBinaryValue = blue.toString(2).padStart(8, '0');
+            
+            colorDisk.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            
+            redBinary.textContent = redBinaryValue;
+            redHex.textContent = redHexValue;
+            redDecimal.textContent = red;
+            
+            greenBinary.textContent = greenBinaryValue;
+            greenHex.textContent = greenHexValue;
+            greenDecimal.textContent = green;
+            
+            blueBinary.textContent = blueBinaryValue;
+            blueHex.textContent = blueHexValue;
+            blueDecimal.textContent = blue;
+        }
+        
+        redSlider.addEventListener('input', updateColor);
+        greenSlider.addEventListener('input', updateColor);
+        blueSlider.addEventListener('input', updateColor);
+        
+        updateColor();
+    </script>
+</body>
+</html>
